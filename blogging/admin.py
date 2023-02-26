@@ -9,7 +9,7 @@ from blogging.models import Post, Category
 @admin.register(Category)
 class Datatypes(admin.ModelAdmin):
     list_display = [field.name for field in Category._meta.get_fields() if not field.many_to_many]
-    # exclude = ['posts']
+    exclude = ['posts']
 
 class PostInline(admin.StackedInline):
     model = Category.posts.through
