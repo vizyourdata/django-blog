@@ -1,11 +1,12 @@
 {% extends "base.html" %}{% block content %}
+<!-- <div class="container">
   <h1>Recent Posts</h1>
   {% comment %} here is where the query happens {% endcomment %}
   {% for post in posts %}
   <div class="post">
-    <h2>
+    <h4>
         <a href="{% url 'blog_detail' post.pk %}">{{ post }}</a>
-    </h2>
+    </h4>
     <p class="byline">
       Posted by {{ post.author.username }} &mdash; {{ post.published_date }}
     </p>
@@ -18,5 +19,45 @@
       {% endfor %}
     </ul>
   </div>
+
+
+  {% endfor %}
+
+</div> -->
+
+
+<div class="container">
+  <h1>Recent Posts</h1>
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+
+  {% comment %} here is where the query happens {% endcomment %}
+  {% for post in post_list %}
+
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h4>
+              <a href="{% url 'blog_detail' post.pk %}">{{ post}}</a>
+          </h4>
+          <p class="byline">
+            Posted by {{ post.author.username }} &mdash; {{ post.published_date }}
+          </p>
+          <div class="post-body">
+            {{ post.text }}
+          </div>
+          <ul class="categories">
+            {% for category in post.categories.all %}
+              <li>{{ category }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
   {% endfor %}
 {% endblock %}
+</div>
+</div>
